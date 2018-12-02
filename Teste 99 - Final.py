@@ -1,67 +1,6 @@
 
 # coding: utf-8
 
-# # Avaliação para Data Analyst - 99
-# 
-# Essa análise faz parte do processo de seleção para a vaga de data analyst na 99. A 99, antiga 99 Taxi, foi fundada em 2012 como um aplicativo para conectar passageiros a taxistas.
-# 
-# Graças a seu crescimento, a empresa recebeu investimentos milinários ao longo de 2017 , sendo finalmente adquirda pela gigante mundial de transporte privado, [Didi Chuxing](https://pt.wikipedia.org/wiki/Didi_Chuxing), em janeiro de 2018. Após essa aquisição, estima-se que a empresa fundada por por Paulo Veras, Renato Freitas e Ariel Lambrecht atingiu o valor de mercado de US$1 Bilhão se tornando a primeira "unicórnio" brasileira. 
-# 
-# ## O exercício
-# 
-# O exercício propõe a realização de uma análise sobre as despesas com cotas parlamentares do congresso nacional no período de 2009 à 2017. 
-# 
-# Os dados utilizados foram extraídos do portal [dos dados abertos](http://www2.camara.leg.br/transparencia/cota-para-exercicio-da-atividade-parlamentar/dados-abertos-cota-parlamentar) da câmara federal. Aqui também pode ser acessada a descrição dos [dados](http://www2.camara.leg.br/transparencia/cota-para-exercicio-da-atividade-parlamentar/explicacoes-sobre-o-formato-dos-arquivos-xml).
-# 
-# O exercício se divide em duas partes:
-# 
-#    
-# ### 1ª parte: 
-# 
-# **Fazendo uso de gráficos, tabelas e/ou métricas estatísticas, responder as seguintes questões:**
-# 
-# a. Como se comportam os gastos com cotas parlamentares ao longo do tempo? Existe alguma tendência de aumento ou redução desse custo? Existe sazonalidade?
-# 
-# b. Quais foram os parlamentares que mais consumiram recursos durante o mandato 2011-2014? E
-# quais foram os que menos consumiram recursos?
-# 
-# c. Quais são as categorias de despesas mais onerosas dentre os recursos destinados às cotas
-# parlamentares?
-# 
-# d. Qual é o custo per capita de um parlamentar em cada unidade da federação? (considerando
-# somente as despesas de cota parlamentar)
-# 
-# 
-# ### 2ª parte:
-# 
-# **Essa parte é livre, ficando a cargo do candidato realizar análises e responder suas próprias questões.**
-# 
-# Neste caso, responderei as seguintes questões:
-# 
-# a. Qual partido mais consumiu recursos ? 
-# 
-# b. Qual candidato gastou mais em combustível no período x ?
-# 
-# 
-# 
-# # O trabalho será dividido nas seguintes sessões:
-# 
-# ### 1. Carga, limpeza e transformação dos dados:
-# 
-# Nessa etapa irei explorar o conjunto de dados em busca de anomalias que precisam ser tratadas para viabilizar a devida análise. Isso envolve detectar valores ausentes, corrigir o formato de dados armazenados de forma incorreta e criar e/ou transformar os dados a partir dos atributos existentes. 
-# 
-# ### 2. Análise exploratória
-# 
-# Aqui buscaremos as respostas para as questões realizadas, bem como descobrir novos questionamentos que possam nos direcionar a descobertas significantes.
-# 
-# ### 3. Conclusão
-# 
-# Nessa seção demonstrarei as conclusões da análise e compartilharei os ***insghts*** descobertos, bem como novas possíveis linhas de análise.
-# 
-
-# ## 1. Carga, limpeza e transformação dos dados
-
-# Importanto as bibliotecas necessárias para a análise e carregando os dados.
 
 # In[1]:
 
@@ -171,39 +110,6 @@ df_completo.isnull().sum()
 df_completo.info()
 
 
-# Agora que os dados foram carregados, iniciaremos o processo de tratamento dos dados. Como vimos todos os dados estão com o formato de 'object'. Isso aconteceu pois especifiquei que o dataset teria apenas um tipo de dado através do parâmetro `dtype` no momento de importá-lo. Isso foi necessário devido ao tamanho do dataset (mais de 3MM de linhas), o pandas reconhece o tipo de dados de cada coluna apenas após percorre-la por completo. Essa tarefa neste dataset exije muita performance de memória e está sujeito a erros, por isso, especifiquei um único formato para todo o dataset, livrando o pandas dessa tarefa.
-# 
-# 
-
-# ## Tranformações a serem realizadas
-# 
-# **Valores ausentes:**
-# 
-# **nuLegislatura:** Temos apenas 7 valores nulos, irei excluir essas linhas, acredito que esse número não irá prejudicar a análise.
-# 
-# **sgUF** e **sgPartido**: 3786 valores nulos, irei usar a mesma abordagem, tendo em vista que esse número representam nem 1% do volume total dos dados;
-# 
-# **txtDescricaoEspecificacao**: Conforme a descrição dos dados, essa coluna trata-se de uma descrição mais detalhada de algum serviço e essa descrição só é necessária em alguns casos. Portanto, é de se esperar um considerável volume de dados ausesntes. Irei preencher os valores nulos com "Sem Detalhamento".
-# 
-# **datEmissao**: Através dessa coluna, podemos extrair o dia da semana. Assumindo que a data da nota é a data que o serviço foi prestado, podemos extrair algumas informações interessantes. Entretanto ela tem 44 mil valores nulos, vamos ver como iremos tratá-los.
-# 
-# **txtPassageiro** e **txtPassageiro**: Similar a coluna **txtDescricaoEspecificacao** só é preenchida quando o serviço prestado se trata de passagem aérea, pode ser interessante descobrir quais parlamentares mais usam este serviço, por isso irei manter essa coluna e os dados ausentes serão preenchidos com a informação 'Não é Serviço de voo'.
-# 
-# 
-# **Formatação dos dados**:
-# 
-# Todos os dados estão no formato `object`o que é um problema. Nem todas as colunas devem armazenar dados neste formato. Seguem as colunas que devem sofrer alterações:
-# 
-# **vlrLiquido**: Tranformar este dados em `float`, tendo em vista que trata-se de dinheiro.
-# 
-# **numMes** e **numAno**: Transformar em `int`.
-
-# ### Preparação dos dados 
-# 
-# #### Valores ausentes
-# 
-
-# **txtDescricaoEspecificacao**
 
 # In[8]:
 
@@ -211,9 +117,6 @@ df_completo.info()
 df_completo.txtDescricaoEspecificacao.value_counts()
 
 
-# Ops ! Parece que um valor similar já existe na coluna, por que nem todos estão preenchidos ?
-# 
-# Vamos filtrar e entender melhor estes dados. Vamos selecionar as linhas do dataset apenas onde o valor de txt.DescricaoEspecificacao esteja nulo:
 
 # In[9]:
 
