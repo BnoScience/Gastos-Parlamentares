@@ -1,68 +1,6 @@
 
 # coding: utf-8
 
-# # Avaliação para Data Analyst - 99
-# 
-# Essa análise faz parte do processo de seleção para a vaga de data analyst na 99. A 99, antiga 99 Taxi, foi fundada em 2012 como um aplicativo para conectar passageiros a taxistas.
-# 
-# Graças a seu crescimento, a empresa recebeu investimentos milinários ao longo de 2017 , sendo finalmente adquirda pela gigante mundial de transporte privado, [Didi Chuxing](https://pt.wikipedia.org/wiki/Didi_Chuxing), em janeiro de 2018. Após essa aquisição, estima-se que a empresa fundada por por Paulo Veras, Renato Freitas e Ariel Lambrecht atingiu o valor de mercado de US$1 Bilhão se tornando a primeira "unicórnio" brasileira. 
-# 
-# ## O exercício
-# 
-# O exercício propõe a realização de uma análise sobre as despesas com cotas parlamentares do congresso nacional no período de 2009 à 2017. 
-# 
-# Os dados utilizados foram extraídos do portal [dos dados abertos](http://www2.camara.leg.br/transparencia/cota-para-exercicio-da-atividade-parlamentar/dados-abertos-cota-parlamentar) da câmara federal. Aqui também pode ser acessada a descrição dos [dados](http://www2.camara.leg.br/transparencia/cota-para-exercicio-da-atividade-parlamentar/explicacoes-sobre-o-formato-dos-arquivos-xml).
-# 
-# O exercício se divide em duas partes:
-# 
-#    
-# ### 1ª parte: 
-# 
-# **Fazendo uso de gráficos, tabelas e/ou métricas estatísticas, responder as seguintes questões:**
-# 
-# a. Como se comportam os gastos com cotas parlamentares ao longo do tempo? Existe alguma tendência de aumento ou redução desse custo? Existe sazonalidade?
-# 
-# b. Quais foram os parlamentares que mais consumiram recursos durante o mandato 2011-2014? E
-# quais foram os que menos consumiram recursos?
-# 
-# c. Quais são as categorias de despesas mais onerosas dentre os recursos destinados às cotas
-# parlamentares?
-# 
-# d. Qual é o custo per capita de um parlamentar em cada unidade da federação? (considerando
-# somente as despesas de cota parlamentar)
-# 
-# 
-# ### 2ª parte:
-# 
-# **Essa parte é livre, ficando a cargo do candidato realizar análises e responder suas próprias questões.**
-# 
-# Neste caso, responderei as seguintes questões:
-# 
-# a. Qual partido mais consumiu recursos ? 
-# 
-# b. Qual candidato gastou mais em combustível no período x ?
-# 
-# 
-# 
-# # O trabalho será dividido nas seguintes sessões:
-# 
-# ### 1. Carga, limpeza e transformação dos dados:
-# 
-# Nessa etapa irei explorar o conjunto de dados em busca de anomalias que precisam ser tratadas para viabilizar a devida análise. Isso envolve detectar valores ausentes, corrigir o formato de dados armazenados de forma incorreta e criar e/ou transformar os dados a partir dos atributos existentes. 
-# 
-# ### 2. Análise exploratória
-# 
-# Aqui buscaremos as respostas para as questões realizadas, bem como descobrir novos questionamentos que possam nos direcionar a descobertas significantes.
-# 
-# ### 3. Conclusão
-# 
-# Nessa seção demonstrarei as conclusões da análise e compartilharei os ***insghts*** descobertos, bem como novas possíveis linhas de análise.
-# 
-
-# ## 1. Carga, limpeza e transformação dos dados
-
-# Importanto as bibliotecas necessárias para a análise e carregando os dados.
-
 # In[1]:
 
 
